@@ -30,6 +30,8 @@ docker compose up -d --build
 Swagger is available at `http://localhost:3000/docs`.
 Health check is available at `http://localhost:3000/health`.
 
+Docker builds use `.dockerignore` so local dependencies, Git metadata, caches, and generated artifacts do not enter the image build context.
+
 ## Automated Checks
 
 ```powershell
