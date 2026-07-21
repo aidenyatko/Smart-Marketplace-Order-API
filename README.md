@@ -17,6 +17,16 @@ MVP microservice backend for a small marketplace. A seller creates a product, a 
 - `postgres`: durable storage.
 - `redis`: microservice transport and notification event channel.
 
+## Architecture Flow
+
+1. The client calls the HTTP API.
+2. Auth guards validate JWT and RBAC rules.
+3. Product commands are handled by `app`.
+4. Order commands are sent to `orders-service` over Redis transport.
+5. `orders-service` reserves stock in PostgreSQL inside a transaction.
+6. `orders-service` publishes an order notification to Redis.
+7. The WebSocket gateway forwards the notification to the buyer.
+
 ## Run
 
 ```powershell
@@ -54,6 +64,13 @@ RBAC tests cover role guard behavior and product ownership rules.
 7. Confirm the product stock decreases and `order.status.updated` is emitted.
 
 The WebSocket gateway listens to Redis order events and forwards them to the authenticated buyer room.
+
+## Manual Security Checks
+
+- Buyer creating a product must return `403`.
+- Seller creating an order must return `403`.
+- Invalid JWT must return `401`.
+- Order quantity greater than stock must return a client error and must not reduce stock.
 
 ## GitFlow
 
