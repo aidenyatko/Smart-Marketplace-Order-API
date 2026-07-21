@@ -53,6 +53,8 @@ RBAC tests cover role guard behavior and product ownership rules.
 6. Create an order with `POST /orders` using the buyer bearer token.
 7. Confirm the product stock decreases and `order.status.updated` is emitted.
 
+The WebSocket gateway listens to Redis order events and forwards them to the authenticated buyer room.
+
 ## GitFlow
 
 - `main` contains stable reviewed code.
