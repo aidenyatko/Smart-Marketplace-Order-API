@@ -12,6 +12,10 @@ Orders and stock live in PostgreSQL. Stock reservation happens in a transaction 
 
 Redis is used as the NestJS microservice transport and as the order notification channel. The orders service publishes order status events, and the API WebSocket gateway forwards them to connected clients.
 
+## Error Mapping Across Services
+
+The orders service converts domain HTTP exceptions into RPC payloads. The API converts those payloads back into HTTP responses, so clients receive stable status codes even though order work runs in a separate service.
+
 ## JWT And RBAC
 
 JWT keeps the API stateless. RBAC is intentionally simple: buyers place orders, sellers manage products, and admins can inspect or update broader data.
