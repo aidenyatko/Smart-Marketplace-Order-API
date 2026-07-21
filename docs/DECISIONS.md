@@ -23,3 +23,7 @@ JWT keeps the API stateless. RBAC is intentionally simple: buyers place orders, 
 ## MVP Boundaries
 
 The MVP excludes payments, delivery, refunds, refresh token rotation, and a frontend. These features would add product scope without improving the core backend signal for this project.
+
+## Testing Discipline
+
+Each feature branch is validated with lint, unit tests, build, e2e smoke tests, and a clean Docker run. Manual checks are run at the end of each branch so the branch is tested from a fresh PostgreSQL volume.

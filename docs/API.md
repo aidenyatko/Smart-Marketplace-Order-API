@@ -44,3 +44,7 @@ Client event:
 Server event:
 
 - `order.status.updated` with `{ "orderId": "uuid", "status": "notified" }`
+
+## Error Responses
+
+Validation errors return `400`. Missing or invalid JWT returns `401`. Role violations return `403`. Order service domain errors are mapped back to HTTP responses by the API gateway.
