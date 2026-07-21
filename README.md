@@ -41,6 +41,8 @@ npm.cmd run build
 npm.cmd run test:e2e
 ```
 
+RBAC tests cover role guard behavior and product ownership rules.
+
 ## Manual MVP Scenario
 
 1. Register a seller with `POST /auth/register`.
